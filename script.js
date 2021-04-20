@@ -13,3 +13,21 @@ async function fetchCategoriesFromAPI() {
     const data = await fetchData(TOTAL_CATEGORIES_URL);
     return data.trivia_categories;
 }
+// récupère les questions de l'API et renvoie un objet contenant les questions et les réponses.
+async function fetchQuestionsFromAPI(url) {
+    const data = await fetchData(url);
+    if (data.response_code === 0) {
+        const questions = data.results;
+        const list = [];
+        questions.forEach(element => {
+            const question = {
+                question: decodeChars(element.question),
+                answers: shuffle(element.incorrect_answers.concat(element.correct_answer)), // il faudra décoder les caractères plus tard
+                correct: decodeChars(element.correct_answer)
+            }
+            list.push(question);
+        });
+        return list;
+    }
+    return false;
+}
