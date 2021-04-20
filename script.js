@@ -32,9 +32,6 @@ async function fetchQuestionsFromAPI(url) {
     return false;
 }
 
-<<<<<<< HEAD
-=======
-
 // Fisher-Yates array shuffling algorithm
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -45,4 +42,3 @@ function shuffle(array) {
     }
     return array;
 }
->>>>>>> lucie
