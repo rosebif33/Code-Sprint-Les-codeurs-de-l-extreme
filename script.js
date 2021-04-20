@@ -32,3 +32,9 @@ async function fetchQuestionsFromAPI(url) {
     return false;
 }
 
+// decodes special HTML characters
+function decodeChars(specialCharacterString) {
+    const text = document.createElement('textarea');
+    text.innerHTML = specialCharacterString;
+    return text.value;
+}
