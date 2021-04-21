@@ -80,10 +80,31 @@ function setQuestionButtons(list, answers, correct) {
     setQuestionNumber();
     answers.forEach(element => {
         const button = document.createElement('button');
-        const text = document.createTextNode(decodeChars(element)); // decoding special characters from answers
+        const text = document.createTextNode(decodeChars(element)); // décocade des caractères spéciaux
         button.appendChild(text);
         button.classList.add('btn');
         div.appendChild(button);
         button.addEventListener('click', () => questionButtonEventHandler(button, correct, list));
     });
+}
+
+// lancement de l'événement lors de l'activation du bouton
+function questionButtonEventHandler(button, correctAnswer, list) {
+    const pressedButton = button.innerText;
+    if (pressedButton === correctAnswer) {
+        score++;
+        alert('Correct!');
+    } else {
+        alert('Wrong.\nCorrect Answer: ' + correctAnswer);
+    }
+    index++;
+    removeButtons();
+    startQuiz(list);
+}
+
+// enlever le numéro de la question en bas
+function removeQuestionNumber() {
+    const h1Element = document.getElementById('question-number');
+    h1Element.classList.remove('number');
+    h1Element.innerText = '';
 }
