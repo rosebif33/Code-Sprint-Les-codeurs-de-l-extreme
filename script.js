@@ -32,7 +32,7 @@ async function fetchQuestionsFromAPI(url) {
     return false;
 }
 
-// Fisher-Yates array shuffling algorithm
+// Algorithme de brassage des tableaux de Fisher-Yates
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * i)
@@ -42,9 +42,15 @@ function shuffle(array) {
     }
     return array;
 }
-// decodes special HTML characters
+// décode les caractères spéciaux HTML
 function decodeChars(specialCharacterString) {
     const text = document.createElement('textarea');
     text.innerHTML = specialCharacterString;
     return text.value;
+}
+
+// définit le titre de la balise h1
+function setTitle(string) {
+    const title = document.getElementById('title');
+    title.innerText = string;
 }
