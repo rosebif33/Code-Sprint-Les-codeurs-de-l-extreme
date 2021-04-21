@@ -54,3 +54,11 @@ function setTitle(string) {
     const title = document.getElementById('title');
     title.innerText = string;
 }
+
+// supprime les boutons de la balise div
+function removeButtons() {
+    const div = document.getElementById('buttons');
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+}
