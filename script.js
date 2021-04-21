@@ -8,11 +8,13 @@ async function fetchData(url) {
     const response = await fetch(url);
     return response.json();
 }
+
 // récupérer la data des categories de API
 async function fetchCategoriesFromAPI() {
     const data = await fetchData(TOTAL_CATEGORIES_URL);
     return data.trivia_categories;
 }
+
 // récupère les questions de l'API et renvoie un objet contenant les questions et les réponses.
 async function fetchQuestionsFromAPI(url) {
     const data = await fetchData(url);
@@ -42,6 +44,7 @@ function shuffle(array) {
     }
     return array;
 }
+
 // décode les caractères spéciaux HTML
 function decodeChars(specialCharacterString) {
     const text = document.createElement('textarea');
@@ -61,4 +64,26 @@ function removeButtons() {
     while (div.firstChild) {
         div.removeChild(div.firstChild);
     }
+}
+
+// mettre le numéro de la question en bas du quizz
+function setQuestionNumber() {
+    let questionNumber = index + 1;
+    const h1Element = document.getElementById('question-number');
+    h1Element.classList.add('number');
+    h1Element.innerText = questionNumber + '/10';
+}
+
+// mettre le bouton à chaque question
+function setQuestionButtons(list, answers, correct) {
+    const div = document.getElementById('buttons');
+    setQuestionNumber();
+    answers.forEach(element => {
+        const button = document.createElement('button');
+        const text = document.createTextNode(decodeChars(element)); // decoding special characters from answers
+        button.appendChild(text);
+        button.classList.add('btn');
+        div.appendChild(button);
+        button.addEventListener('click', () => questionButtonEventHandler(button, correct, list));
+    });
 }
